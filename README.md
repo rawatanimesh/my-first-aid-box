@@ -9,4 +9,5 @@ This application enables you to "Prep. Track. Refill" you first aid box.
 * React
 * Typescript
 * Tailwind CSS
+* Material UI component library
 ```
