@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -42,9 +43,13 @@ function AppHeaderBar() {
     setAnchorElUser(null);
   };
 
-  const handlePageClick = (event) => {
-    console.log(event);
+  const handlePageClick = (page) => {
+    console.log(page);
+    const path = `/${page.toLowerCase().replace(/ /g, "-")}`;
+    navigate(path);
   };
+
+  const navigate = useNavigate();
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -53,10 +58,13 @@ function AppHeaderBar() {
       </Typography> */}
       <Divider />
       <List>
-        {pages.map((item) => (
-          <ListItem key={item} disablePadding>
+        {pages.map((page) => (
+          <ListItem key={page} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <ListItemText
+                primary={page}
+                onClick={() => handlePageClick(page)}
+              />
             </ListItemButton>
           </ListItem>
         ))}
@@ -76,7 +84,6 @@ function AppHeaderBar() {
               variant="h6"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -108,7 +115,6 @@ function AppHeaderBar() {
               variant="h5"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
